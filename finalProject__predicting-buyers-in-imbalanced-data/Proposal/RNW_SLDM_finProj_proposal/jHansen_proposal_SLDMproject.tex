@@ -1,0 +1,150 @@
+\documentclass[12pt,letterpaper,final]{article}
+
+\usepackage{Sweave}
+\usepackage{graphicx}
+\usepackage{natbib}
+\usepackage{url}
+\usepackage{hyperref}
+\usepackage{caption}
+\usepackage{rotating}
+\usepackage{verbatim}
+\usepackage{textcomp}
+\usepackage[title,titletoc,toc]{appendix}
+\usepackage{wasysym}
+\usepackage[normalem]{ulem}
+
+\setlength{\oddsidemargin}{0in}
+\setlength{\textwidth}{6.15in}
+%\setlength{\topmargin}{0.5in}
+\setlength{\textheight}{22cm}
+\setlength{\headheight}{0in}
+\setlength{\headsep}{0in}
+\setlength{\parskip}{5pt plus 2pt minus 3pt}
+
+\def\thefootnote{\fnsymbol{footnote}}
+\setcounter{footnote}{1}
+
+\renewcommand{\baselinestretch}{1.2}
+\renewcommand{\labelenumi}{(\roman{enumi})}
+
+\renewcommand{\topfraction}{1.0}
+\renewcommand{\bottomfraction}{1.0}
+\renewcommand{\textfraction}{0.0}
+\renewcommand{\floatpagefraction}{1.0}
+\renewcommand{\dbltopfraction}{1.0}
+
+\newtheorem{definition}{Definition}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{fact}[theorem]{Fact}
+
+% to get nice proofs ...
+\newcommand{\qedsymb}{\mbox{ }~\hfill~{\rule{2mm}{2mm}}}
+\newenvironment{proof}{\begin{trivlist}
+\item[\hspace{\labelsep}{\bf\noindent Proof: }]
+}{\qedsymb\end{trivlist}}
+
+
+\newfont{\msymb}{cmsy10 scaled 1000}
+
+\def\nullset{\mbox{\O}}
+\def\R{{I\!\!R}}
+\def\C{{I\!\!\!\!C}}
+\def\N{{I\!\!N}}
+
+\def\P{\mbox{\msymb P}}
+
+
+%\parskip 0.1in
+\pagenumbering{arabic}    %  Start using 1,2,... as page numbers.
+\pagestyle{plain}         %  Page numbers in middle bottom of page.
+%\setcounter{page}{80}  % XXXXXXXXXXXXXXXXX
+%\setcounter{theorem}{5} % XXXXXXXXXXXXXXXXX
+%\setcounter{definition}{10} % XXXXXXXXXXXXXXXXX
+
+\parindent 0in
+\setlength{\parskip}{1ex plus 0.5ex minus 0.2ex}
+
+
+\begin{document}
+
+\input{jHansen_proposal_SLDMproject-concordance}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{titlepage}
+\vspace*{4.5cm}
+\begin{center}
+{\LARGE \bf Stat 6910, Section 003} \\[0.5cm]
+{\LARGE \bf Statistical Learning and Data Mining II} \\[0.5cm]
+{\LARGE \bf Fall 2018} \\[0.5cm]
+~ \\[2cm]
+{\LARGE \bf Final Project Proposal} \\[0.5cm]
+~ \\[2cm]
+{\LARGE \bf Matt Isaac} \\[0.4cm]
+{\LARGE \bf Colby Wight} \\[0.4cm]
+{\LARGE \bf Jared Hansen} \\[0.4cm]
+\end{center}
+
+\thispagestyle{empty}
+\vfill
+\end{titlepage}
+
+\newpage
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{enumerate}
+
+
+\item \uline{Goal: Data and Problem}\\
+Our data set can be found at: \url{https://www.kaggle.com/sonujha090/bank-marketing}. This data set comes from the phone call marketing campaign of a Portuguese bank. The goal of this marketing campaign was to get their customers to use a term deposit product (``CD"). The dataset contains a binary "yes/no" response, with 16 other features that can be used for prediction. There are roughly 45,000 observations in the data set. Some of the features given include: age, occupation, marital status, education level, and account balance.\\
+Luckily the data is already very clean. There may be a few missing values present, but otherwise the data is in a format that is ready for predictive modeling.\\
+The goal of our analysis is to help the bank identify (classify) customers that are likely to respond positively to the campaign and agree to a term deposit (``1's). One of the challenges that we anticipate having to deal with is imbalanced class sizes: there are far more 0's (``no's") than 1's (``yes's"), so we'll try some sampling methods to ameliorate this issue. Additionally, we'll have to make some decisions about splitting up the data into training, test, and validation sets, as well as utilizing cross-validation or other methods for obtaining accuracy metrics.
+
+
+\item \uline{Methods}\\
+This problem lends itself well to several methods, a few of which we've discussed in class. The methods we're planning to use include:
+\begin{itemize}
+  \item Logistic regression
+  \item Support vector machines
+  \item Neural networks
+  \item Random forests and/or decision trees
+  \item QDA (maybe, but probably not)
+\end{itemize}
+(This selection of methods satisfies the requirement of ``Apply(ing) at least 4 ML methods to the problem, 1-3 methods from those covered in class, at least one method not covered in class".)
+
+\item \uline{Contributions of Each Member}\\
+Our plan is to assign each member one specific machine learning method (TBD), and split the work for the fourth method. We'll work together collaboratively to aggregate our findings and write a report detailing the results our analyses.
+
+
+
+
+
+\end{enumerate}
+\end{document}
+

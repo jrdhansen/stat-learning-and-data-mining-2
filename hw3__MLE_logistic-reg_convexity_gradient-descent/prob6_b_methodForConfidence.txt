@@ -1,0 +1,13 @@
+The 20 misclassified images will be those whose output probability is furthest from 0.5
+(and obviously for which the classification is incorrect).
+
+Based on examination of the data, fours are given y values of -1, and nines are given y values of 1.
+To see which are the "worst" misclassified, we're looking for the output probabilities that are most extreme
+(nearest 0 or 1) which also have a misclassification.
+
+To do this, we took the absValue(predictedProbability - 0.5) to see the "confidence" of each output: the larger
+this absolute value, the more confident in the respective prediciton.
+Then, we sorted these values from largest to smallest. All we're looking for now are the largest confidence values
+that ALSO have a misclassification. This is nice, as it doesn't require discrimination by class: it only looks at
+how confident we are of a certain classification. It may help us in identifying patterns for which the algorithm
+consistently messes up (bias playing out in practice).

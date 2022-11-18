@@ -1,0 +1,301 @@
+\documentclass[12pt,letterpaper,final]{article}
+
+\usepackage{Sweave}
+\usepackage{graphicx}
+\usepackage{natbib}
+\usepackage{hyperref}
+\usepackage{caption}
+\usepackage{rotating}
+\usepackage{verbatim}
+\usepackage{textcomp}
+\usepackage{wasysym}
+\usepackage{indentfirst}
+\usepackage{enumerate}
+\usepackage{amssymb}
+\usepackage{amsmath}
+
+\setlength{\oddsidemargin}{0in}
+\setlength{\textwidth}{6.15in}
+%\setlength{\topmargin}{0.5in}
+\setlength{\textheight}{22cm}
+\setlength{\headheight}{0in}
+\setlength{\headsep}{0in}
+\setlength{\parskip}{5pt plus 2pt minus 3pt}
+
+\def\thefootnote{\fnsymbol{footnote}}
+\setcounter{footnote}{1}
+
+\renewcommand{\baselinestretch}{1.2}
+\renewcommand{\labelenumi}{(\roman{enumi})}
+
+\renewcommand{\topfraction}{1.0}
+\renewcommand{\bottomfraction}{1.0}
+\renewcommand{\textfraction}{0.0}
+\renewcommand{\floatpagefraction}{1.0}
+
+\newtheorem{definition}{Definition}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{fact}[theorem]{Fact}
+
+% to get nice proofs ...
+\newcommand{\qedsymb}{\mbox{ }~\hfill~{\rule{2mm}{2mm}}}
+\newenvironment{proof}{\begin{trivlist}
+\item[\hspace{\labelsep}{\bf\noindent Proof: }]
+}{\qedsymb\end{trivlist}}
+
+
+\newfont{\msymb}{cmsy10 scaled 1000}
+
+\def\nullset{\mbox{\O}}
+\def\R{{I\!\!R}}
+\def\C{{I\!\!\!\!C}}
+\def\N{{I\!\!N}}
+
+\def\P{\mbox{\msymb P}}
+
+
+%\parskip 0.1in
+\pagenumbering{arabic}    %  Start using 1,2,... as page numbers.
+\pagestyle{plain}         %  Page numbers in middle bottom of page.
+%\setcounter{page}{80}  % XXXXXXXXXXXXXXXXX
+%\setcounter{theorem}{5} % XXXXXXXXXXXXXXXXX
+%\setcounter{definition}{10} % XXXXXXXXXXXXXXXXX
+
+\parindent 0in
+
+
+\begin{document}
+
+\SweaveOpts{concordance=TRUE}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{titlepage}
+\vspace*{4.5cm}
+\begin{center}
+{\LARGE \bf Stat 6910, Section 003} \\[0.5cm]
+{\LARGE \bf Statistical Learning and Data Mining II} \\[0.5cm]
+{\LARGE \bf Fall 2018} \\[0.5cm]
+~ \\[2cm]
+{\LARGE \bf Homework 2} \\[0.5cm]
+{\LARGE \bf Jared Hansen} \\[0.4cm]
+A-number: \verb|A01439768| \\[0.3cm]
+e-mail: \verb|jrdhansen@gmail.com| \\[0.3cm]
+\end{center}
+
+\thispagestyle{empty}
+\vfill
+\end{titlepage}
+
+
+\newpage
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{table}\centering
+\begin{tabular*}{6.15in}{@{\extracolsep{\fill}}|llr|} \hline
+Stat 6910 Statistical Learning and Data Mining II & \hspace*{0.5 in} & Fall 2018 \\
+ & & \\
+\multicolumn{3}{|c|}{
+Homework Assignment 2} \\
+ & & \\
+\multicolumn{3}{|c|}{
+100 Points --- Due Friday 10/26/2018 (via Canvas by 5:00 pm)} \\
+\hline
+\end{tabular*}
+\end{table}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{enumerate}[1.]
+\item Linear Algebra Review (10 pts)
+  \begin{enumerate}
+  \item (5 pts) Show that if $U$ is an orthogonal matrix, then for all $\textbf{x} \in \mathbb{R}^{d}, \|\textbf{x}\| = \|U \textbf{x}\|$, where $\|\cdot\|$ indicates the Euclidean norm.\\
+  \\
+  We'll make use of the following properties
+  \begin{itemize}
+    \item Since $U$ is orthogonal, by definition $U^{T}U = UU^{T} = \mathbb{I}$
+    \item $\|\textbf{x}\| = ({\textbf{x}}^T{\textbf{x}})^{1/2}$
+  \end{itemize}
+  From the definition of $\|\cdot\|$, $\|U \textbf{x}\| = ((U\textbf{x})^{T} (U\textbf{x}))^{1/2} = (\textbf{x}^{T}U^{T}U\textbf{x})^{1/2}$. Since we know that $U^{T}U = \mathbb{I}$, $(\textbf{x}^{T}U^{T}U\textbf{x})^{1/2}$ = (\textbf{x}^{T}\mathbb{I}\textbf{x})^{1/2} = (\textbf{x}^{T}\textbf{x})^{1/2} = \|\textbf{x}\|$ by definition.\\
+  Therefore, $\|\textbf{x}\| = \|U \textbf{x}\|$ $\forall \textbf{x} \in \mathbb{R}^{d}$ when $U$ is an orthogonal matrix.
+  \\
+  \\
+  \item (5 pts) Show that all $2 \times 2$ orthogonal matrices have the form\\
+  $\begin{bmatrix}
+    cos\theta & -sin\theta \\
+    sin\theta & cos\theta
+  \end{bmatrix}
+  or 
+  \begin{bmatrix}
+    cos\theta & sin\theta \\
+    sin\theta & -cos\theta
+  \end{bmatrix}$\\
+  \\
+  \\
+  Since all row vectors and column vectors $\begin{bmatrix} x_i \\ y_i \end{bmatrix}$ of A have unit length and are in $\mathbb{R}^{2}$, each vector can be thought of  as a vector with tail at $(0,0)$ and head on the unit circle.\\
+  Therefore, $\exists$ some angle $\theta$ whose cosine = $x_i$ and whose sine = $y_i$. Instead of describing a row or column vector of A as $\begin{bmatrix} x_i \\ y_i \end{bmatrix}$ we may describe it as $\begin{bmatrix} cos\theta \\ sin\theta \end{bmatrix}$. Let column 1 of A be $\begin{bmatrix} cos\theta \\ sin\theta \end{bmatrix}$. In order for A to remain an orthogonal matrix, the remaining column vector must be orthogonal to $\begin{bmatrix} cos\theta \\ sin\theta \end{bmatrix}$. Let the angle of this other vector be $\alpha$. For two angle to be orthogonal to one another, they need to have a difference of $\pi/2$ radians. In this case, $\alpha = \theta \pm {\pi/2}$.\\
+  This allows column 2 of A to be:
+  \begin{itemize}
+  \item $\begin{bmatrix} cos(\alpha) \\ sin(\alpha) \end{bmatrix}$ = $\begin{bmatrix} cos(\theta + \pi/2) \\ sin(\theta + \pi/2) \end{bmatrix}$ = $\begin{bmatrix} -sin(\theta) \\ cos(\theta) \end{bmatrix}$
+  \item $\begin{bmatrix} cos(\alpha) \\ sin(\alpha) \end{bmatrix}$ = $\begin{bmatrix} cos(\theta - \pi/2) \\ sin(\theta - \pi/2) \end{bmatrix}$ = $\begin{bmatrix} sin(\theta) \\ -cos(\theta) \end{bmatrix}$
+  \end{itemize}
+  Thus, the only two forms of A that are possible are $\begin{bmatrix}
+    cos\theta & -sin\theta \\
+    sin\theta & cos\theta
+  \end{bmatrix}
+  or 
+  \begin{bmatrix}
+    cos\theta & sin\theta \\
+    sin\theta & -cos\theta
+  \end{bmatrix}$
+
+
+  \end{enumerate}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\newpage
+
+
+
+
+
+
+
+
+
+
+
+
+\item Probability (18 pts)
+  \begin{enumerate}
+  \item (9 pts) Let random variables $X$ and $Y$ be jointly continuous with pdf $p(x,y)$. Prove the following results:
+  \\
+    \begin{enumerate}
+    \item $\mathbb{E}[X] = \mathbb{E}_Y[\mathbb{E}_X[X|Y]]$ where $\mathbb{E}_Y$ is the expectation with respect to Y.
+    \\
+    \\
+    \\
+    \\
+    \\
+    \\
+    \\
+    \\
+    \\
+    \\
+    \\
+    \\
+    \\
+    \\
+
+    
+    
+    \item $\mathbb{E}[\textbf{1}[X \in C]] = Pr(X \in C)$ where $\textbf{1}[X \in C]$ is the indicator function of an arbitrary set $C$. That is, $\textbf{1}[X \in C] = 1$ if $X \in C$ and 0 otherwise.
+    \\
+    \\
+    \\
+    \\
+    \\
+    \\
+    
+    \item If $X$ and $Y$ are independent, then $\mathbb{E}[XY] = \mathbb{E}[X]\mathbb{E}[Y]$.
+
+    \end{enumerate}
+  
+\newpage
+
+  \item (9 pts) For the following equations, describe the relationship between them. Write one of four answers to replace the question mark: ``=", ``$\le$", ``$\ge$", ``depends". Choose the most specific relation that always holds and briefly explain why. Assume all probabilities are non-zero.
+    \begin{enumerate}
+    \item $Pr(X = x, Y = y) \textbf{\boxed{\le}} Pr(X = x)$
+    \item $Pr(X = x|Y = y) \textbf{\boxed{depends}} Pr(X = x)$
+    \item $Pr(X = x|Y = y) \textbf{\boxed{\ge}} Pr(Y = y|X = x)Pr(X = x)$
+    \end{enumerate}
+
+  \end{enumerate}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{enumerate}
+
+\end{document}
+
+

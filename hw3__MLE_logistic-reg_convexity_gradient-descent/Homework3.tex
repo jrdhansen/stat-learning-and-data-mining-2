@@ -1,0 +1,161 @@
+%% LyX 2.2.3 created this file.  For more info, see http://www.lyx.org/.
+%% Do not edit unless you really know what you are doing.
+\documentclass[english]{article}
+\usepackage[T1]{fontenc}
+\usepackage[latin9]{inputenc}
+\usepackage{amsbsy}
+\usepackage{amssymb}
+
+\makeatletter
+\@ifundefined{date}{}{\date{}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
+\usepackage[margin=1in]{geometry}
+
+\makeatother
+
+\usepackage{babel}
+\begin{document}
+\global\long\def\x{\mathbf{x}}
+\global\long\def\R{\mathbb{R}}
+\global\long\def\E{\mathbb{E}}
+\global\long\def\ind{\mathbf{1}}
+
+\title{STAT 6910-003 \textendash{} SLDM II \textendash{} Homework \#3}
+
+\author{Due: 5:00 PM 11/2/18}
+\maketitle
+\begin{enumerate}
+\item \textbf{Maximum Likelihood Estimation (14 pts)}
+\begin{enumerate}
+\item Let $X_{1},\dots,X_{n}$ be i.i.d. sample from a Poisson distribution
+with parameter $\lambda$, i.e. 
+\[
+P(X=x;\lambda)=\frac{\lambda^{x}e^{-\lambda}}{x!}.
+\]
+\begin{enumerate}
+\item (2 pts) Write down the likelihood function $L(\lambda)$.
+\item (2 pts) Write down the log-likelihood function $\ell(\lambda)$.
+\item (3 pts) Find the maximum likelihood estimate (MLE) of the parameter
+$\lambda$.
+\end{enumerate}
+\item (7 pts) Let $X_{1},\dots,X_{n}$ be an i.i.d. sample from an exponential
+distribution with the density function 
+\[
+p(x;\beta)=\frac{1}{\beta}e^{-\frac{x}{\beta}},\,0\le x<\infty.
+\]
+Find the MLE of the parameter $\beta$. Given what you know about
+the role that $\beta$ plays in the exponential distribution, does
+the MLE make sense? Why or why not?
+\end{enumerate}
+\item \textbf{Logistic Regression as ERM (5 pts).} Consider training data
+$(\boldsymbol{x}_{1},y_{1}),\dots,(\boldsymbol{x}_{n},y_{n})$ for
+binary classification and assume $y_{i}\in\{-1,1\}$. Show that if
+$L(y,t)=\log(1+\exp(-yt)),$then 
+\[
+\frac{1}{n}\sum_{i=1}^{n}L(y_{i},\boldsymbol{w}^{T}\boldsymbol{x}_{i}+b)
+\]
+is proportional to the negative log-likelihood for logistic regression.
+Therefore ERM with the logistic loss is equivalent to the maximum
+likelihood approach to logistic regression.\\
+\emph{Clarification: }In the above expression, $y$ is assumed to
+be $-1$ or $1$. In the notes, we had $y\in\{0,1\}$. So all you
+need to do is rewrite the negative log-likelihood for logistic regression
+using the $\pm1$ label convention and simplify that formula until
+it looks like the formula above.
+\item \textbf{Convexity and Optimization (24 pts). }Let $f:\R^{d}\rightarrow\R$.
+\begin{enumerate}
+\item (7 pts) Show that if $f$ is strictly convex, then $f$ has at most
+one global minimizer.
+\item (7 pts) Use the Hessian to give a simple proof that the sum of two
+convex functions is convex. You may assume that the two functions
+are twice continuously differentiable.
+\item (7 pts) Consider the function $f(\boldsymbol{x})=\frac{1}{2}\boldsymbol{x}^{T}A\boldsymbol{x}+\boldsymbol{b}^{T}\boldsymbol{x}+c$
+where $A$ is a symmetric $d\times d$ matrix. Derive the Hessian
+of $f$. Under what conditions on $A$ is $f$ convex? Strictly convex?
+\item (3 pts) Let $J(\boldsymbol{\theta})$ be a twice continuously differentiable
+function. Derive the update step for Newton's method from the second
+order approximation of $J(\boldsymbol{\theta})$ (see lecture slides
+for equations for both the update step and the second order approximation).
+\end{enumerate}
+\item \textbf{Logistic regression Hessian (15 pts). }Determine a formula
+for the gradient and the Hessian of the regularized logistic regression
+objective function. Argue that the objective function 
+\[
+J(\boldsymbol{\theta})=-\ell(\boldsymbol{\theta})+\lambda||\boldsymbol{\theta}||^{2}
+\]
+is convex when $\lambda\geq0$, and that for $\lambda>0,$ the objective
+function is strictly convex.\\
+\emph{Hints}: The following conventions and properties regarding vector
+differentiation may be useful. The properties can be easily verified
+from definitions. Try to avoid long, tedious calculations.
+\begin{itemize}
+\item If $f:\R^{n}\rightarrow\R,$ then we adopt the convention 
+\[
+\frac{\partial f(\boldsymbol{z})}{\partial\boldsymbol{z}}:=\nabla f(\boldsymbol{z}).
+\]
+\item If $f:\R^{n}\rightarrow\R^{m}$, adopt the convention 
+\[
+\frac{\partial f(\boldsymbol{z})}{\partial\boldsymbol{z}^{T}}:=\left(\frac{\partial f(\boldsymbol{z})}{\partial\boldsymbol{z}}\right)^{T}.
+\]
+\item Given these conventions, it follows that the Hessian $H$ of $J$
+is 
+\[
+H=\frac{\partial}{\partial\boldsymbol{\theta}^{T}}\left(\frac{\partial J(\boldsymbol{\theta})}{\partial\boldsymbol{\theta}}\right),
+\]
+which is often denoted more concisely as 
+\[
+\frac{\partial^{2}J(\boldsymbol{\theta})}{\partial\boldsymbol{\theta}\partial\boldsymbol{\theta}^{T}}.
+\]
+\item (One form of a multivariate chain rule): If $f(\boldsymbol{z})=g(h(\boldsymbol{z}))$
+where $g:\R\rightarrow\R$ and $h:\R^{n}\rightarrow\R$, then 
+\[
+\nabla f(\boldsymbol{z})=\nabla h(\boldsymbol{z})\cdot g'(h(\boldsymbol{z})).
+\]
+\end{itemize}
+\item \textbf{ERM and Stochastic Gradient Descent} \textbf{(10 pts)}. Given
+training data $(\boldsymbol{x}_{1},y_{1}),\dots,(\boldsymbol{x}_{n},y_{n})$,
+define the empirical risk for either a regression or classification
+problem as 
+\[
+\hat{R}(f_{\boldsymbol{\theta}})=\frac{1}{n}\sum_{i=1}^{n}L\left(y_{i}.f_{\boldsymbol{\theta}}(\boldsymbol{x}_{i})\right).
+\]
+Write pseudocode describing how you would implement stochastic gradient
+descent to minimize $\hat{R}(f_{\boldsymbol{\theta}})$ with respect
+to $\theta$. Assume a fixed mini-batch size of $m$ and assume that
+the step size $\alpha$ is fixed for each epoch.
+\item \textbf{Handwritten digit classification with logistic regression
+(22 pts). }Download the file \texttt{mnist\_49\_3000.mat} from the
+Homework 3 assignment. This is a Matlab data file that contains a
+subset of the MNIST handwritten digit dataset, which is a well-known
+benchmark dataset for classification. This subset contains examples
+of the digits 4 and 9.\\
+The data file contains variables $\boldsymbol{x}$ and $y$, with
+the former containing the image of the digit (reshaped into column
+vector form) and the latter containing the corresponding label ($y\in\{-1,1\}$).
+To visualize an image, you will need to reshape the column vector
+into a square image. You should be able to find methods for loading
+the data file and for reshaping the vector in your preferred language
+through a Google search. If you're struggling to find something that
+works, you may ask for suggestions on Piazza.\\
+Implement Newton's method to find a minimizer of the regularized negative
+log likelihood for logistic regression: $J(\boldsymbol{\theta})=-\ell(\boldsymbol{\theta})+\lambda\left\Vert \boldsymbol{\theta}\right\Vert ^{2}$.
+Try setting $\lambda=10$. Use the first 2000 examples as training
+data and the last 1000 as test data.
+\begin{enumerate}
+\item (6 pts) Report the test error, your termination criterion (you may
+choose), how you initialized $\boldsymbol{\theta}_{0}$, and the value
+of the objective function at the optimum.
+\item (10 pts) Generate a figure displaying 20 images in a $4\times5$ array.
+These images should be the 20 misclassified images for which the logistic
+regression classifier was most confident about its prediction. You
+will have to define a notion of confidence in a reasonable way and
+explain how you define it. In the title of each subplot, indicate
+the true label of the image. What you should expect to see is a bunch
+of 4s that look kind of like 9s and vice versa.
+\item (6 pts) Include your well-organized, clearly commented code.
+\end{enumerate}
+\item How long did this assignment take you? (5 pts)
+\item Type up homework solutions (5 pts)
+\end{enumerate}
+
+\end{document}
